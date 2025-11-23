@@ -150,6 +150,11 @@ def main():
         default=OUTPUT_TRAINING_FILE,
         help=f"Output file for training data (default: {OUTPUT_TRAINING_FILE})",
     )
+    parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="Overwrite output file if it exists (default: append)",
+    )
     args = parser.parse_args()
 
     setup_directories()
@@ -177,7 +182,14 @@ def main():
     for result in results:
         all_training_data.extend(result)
 
-    with open(args.output, "w", encoding="utf-8") as out:
+    mode = "w" if args.overwrite else "a"
+    with open(args.output, mode, encoding="utf-8") as out:
+        if (
+            mode == "a"
+            and os.path.exists(args.output)
+            and os.path.getsize(args.output) > 0
+        ):
+            out.write("\n")
         out.write("\n".join(all_training_data))
 
     print(
