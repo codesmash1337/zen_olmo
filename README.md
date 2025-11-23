@@ -3,7 +3,7 @@ Taking the open source OLMO model and finetuning it to output zen quotes
 
 ## Data Preparation
 
-### fetch_parse_texts.py
+### ```fetch_parse_texts.py```
 Fetches from web + parses a given list of texts into something consumable, with some aggressive parsing to dodge ugly artifacts of txt.
 
 #### Usage
@@ -21,10 +21,10 @@ python fetch_parse_texts.py --file texts.txt
 python fetch_parse_texts.py --output yoda.txt
 ```
 
-### high_quality_texts.txt
+### ```high_quality_texts.txt```
 Contains links to seminal works of zen buddhism
 
-### texts.txt
+### ```texts.txt```
 Contains links to random zen buddhist texts
 
 ## Finetuning strategy
