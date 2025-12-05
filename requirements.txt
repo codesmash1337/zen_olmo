@@ -1,0 +1,11 @@
+--find-links https://www.google.com/url?sa=E&source=gmail&q=https://download.pytorch.org/whl/cu124/torch_stable.html
+
+accelerate
+bitsandbytes
+datasets
+einops
+sentencepiece
+peft
+protobuf
+torch
+transformers
