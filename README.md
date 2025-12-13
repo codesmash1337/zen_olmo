@@ -29,3 +29,14 @@ Contains links to random zen buddhist texts
 
 ## Finetuning strategy
 To start we are going to do some simple PEFT tuning on the high quality datasets
+
+
+
+### Runpod Guide
+
+Redirect where we store:
+mkdir -p /workspace/.cache/huggingface
+export HF_HOME=/workspace/.cache/huggingface
+export HUGGINGFACE_HUB_CACHE=/workspace/.cache/huggingface/hub
+export TRANSFORMERS_CACHE=/workspace/.cache/huggingface/transformers
+export HF_DATASETS_CACHE=/workspace/.cache/huggingface/datasets

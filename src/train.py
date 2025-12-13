@@ -27,7 +27,7 @@ bnb_config = BitsAndBytesConfig(
 )
 
 model = AutoModelForCausalLM.from_pretrained(
-    "allenai/OLMo-3-7B-Base",
+    "allenai/Olmo-3-7B-Base",
     quantization_config=bnb_config,
     device_map="auto",
     trust_remote_code=True,
@@ -113,15 +113,16 @@ def run_validation(tokenizer, sample_prompt="If you see "):
     return avg_loss
 
 
+model.train()
 for epoch in range(epochs):
     total_loss = 0
     for index, batch in enumerate(train_loader):
+        optimizer.zero_grad()
         x, y = batch
         x, y = x.to(device), y.to(device)
         output = model(input_ids=x, labels=y)
         loss = output.loss
 
-        optimizer.zero_grad()
         loss.backward()
         optimizer.step()
         scheduler.step()
@@ -134,6 +135,8 @@ for epoch in range(epochs):
             run_validation(zen_dataset.tokenizer)
 
     print(f"Epoch {epoch + 1}/{epochs} complete")
+    if (epoch + 1) % 2 == 0:
+        model.save_pretrained(f"zen_lora_adapter_epoch{epoch + 1}")
 
 # Save the adapter weights
 model.save_pretrained("zen_lora_adapter")
